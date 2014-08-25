@@ -9,17 +9,11 @@
 import UIKit
 import CoreData
 
-protocol AddLabelDelegate {
-    func labelAdded()
-}
-
 class AddLabelViewController: UIViewController {
 
     @IBOutlet weak var labelNameField: UITextField!
     
     var myContext : NSManagedObjectContext!
-    
-    var delegate : AddLabelDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +37,8 @@ class AddLabelViewController: UIViewController {
         self.myContext.save(&error)
         if error != nil {
             println(error?.localizedDescription)
-        } else {
-            self.delegate?.labelAdded()
-            self.navigationController.popToRootViewControllerAnimated(true)
         }
+        self.navigationController.popToRootViewControllerAnimated(true)
     }
 
     /*

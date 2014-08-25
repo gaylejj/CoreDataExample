@@ -35,7 +35,7 @@ class AddSongsViewController: UIViewController {
         var newSong = NSEntityDescription.insertNewObjectForEntityForName("Song", inManagedObjectContext: labelContext) as Song
         newSong.name = self.nameField.text
         var yearNumber = nf.numberFromString(self.yearField.text)
-        newSong.year = yearNumber
+        newSong.year = yearNumber!
         newSong.artist = self.selectedArtist!
         
         var error : NSError?
