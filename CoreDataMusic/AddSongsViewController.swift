@@ -32,7 +32,7 @@ class AddSongsViewController: UIViewController {
     @IBAction func addSongPressed(sender: AnyObject) {
         
         var labelContext = self.selectedArtist?.managedObjectContext
-        var newSong = NSEntityDescription.insertNewObjectForEntityForName("Song", inManagedObjectContext: labelContext) as Song
+        var newSong = NSEntityDescription.insertNewObjectForEntityForName("Song", inManagedObjectContext: labelContext!) as Song
         newSong.name = self.nameField.text
         var yearNumber = nf.numberFromString(self.yearField.text)
         newSong.year = yearNumber!
@@ -43,7 +43,7 @@ class AddSongsViewController: UIViewController {
         if error != nil {
             println(error?.localizedDescription)
         } else {
-            self.navigationController.popToRootViewControllerAnimated(true)
+            self.navigationController!.popToRootViewControllerAnimated(true)
             println(newSong.year)
             println(newSong.name)
         }

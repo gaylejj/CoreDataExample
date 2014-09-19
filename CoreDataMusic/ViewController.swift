@@ -55,7 +55,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.performSegueWithIdentifier("addLabel", sender: self)
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("labelCell", forIndexPath: indexPath) as UITableViewCell
         
         //Move configure code to another method
@@ -66,23 +66,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
-        var label = self.fetchResultsController.fetchedObjects[indexPath.row] as Label
+        var label = self.fetchResultsController.fetchedObjects![indexPath.row] as Label
         
-        cell.textLabel.text = label.name
+        cell.textLabel!.text = label.name
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.fetchResultsController.sections[section].numberOfObjects
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.fetchResultsController.sections![section].numberOfObjects
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "showArtists" {
             let artistsVC = segue.destinationViewController as ArtistsViewController
-            var label = self.fetchResultsController.fetchedObjects[self.tableView.indexPathForSelectedRow().row] as Label
+            var label = self.fetchResultsController.fetchedObjects![self.tableView.indexPathForSelectedRow()!.row] as Label
 
             artistsVC.selectedLabel = label
         }
@@ -96,7 +96,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView!, editActionsForRowAtIndexPath indexPath: NSIndexPath!) -> [AnyObject]! {
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete") { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             //Implement delete changes
-            if let labelForRow = self.fetchResultsController.fetchedObjects[indexPath.row] as? Label {
+            if let labelForRow = self.fetchResultsController.fetchedObjects![indexPath.row] as? Label {
                 self.myContext.deleteObject(labelForRow)
                 self.myContext.save(nil)
             }
@@ -134,7 +134,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         case .Delete:
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         case .Update:
-            self.configureCell(self.tableView.cellForRowAtIndexPath(indexPath), forIndexPath: indexPath)
+            self.configureCell(self.tableView.cellForRowAtIndexPath(indexPath)!, forIndexPath: indexPath)
         case .Move:
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)

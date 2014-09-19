@@ -29,25 +29,25 @@ class SongsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("songCell", forIndexPath: indexPath) as UITableViewCell
         
         var song = self.songs[indexPath.row]
         
-        cell.textLabel.text = song.name
+        cell.textLabel!.text = song.name
         println(song.year)
 //        var nf = NSNumberFormatter()
 //        var songYear = nf.stringFromNumber(song.year)
-        cell.detailTextLabel.text = "\(song.year)"
+        cell.detailTextLabel!.text = "\(song.year)"
         
         return cell
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.songs.count
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "addSong" {
             let addSongVC = segue.destinationViewController as AddSongsViewController
             addSongVC.selectedArtist = self.selectedArtist

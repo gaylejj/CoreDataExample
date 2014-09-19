@@ -39,7 +39,7 @@ class AddArtistViewController: UIViewController {
     @IBAction func saveButtonPressed(sender: AnyObject) {
         
         var labelContext = self.selectedLabel?.managedObjectContext
-        var newArtist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: labelContext) as Artist
+        var newArtist = NSEntityDescription.insertNewObjectForEntityForName("Artist", inManagedObjectContext: labelContext!) as Artist
         newArtist.firstName = self.firstNameField.text
         newArtist.lastName = self.lastNameField.text
         newArtist.label = self.selectedLabel!
@@ -50,7 +50,7 @@ class AddArtistViewController: UIViewController {
             println(error?.localizedDescription)
         } else {
             self.delegate?.artistAdded()
-            self.navigationController.popToRootViewControllerAnimated(true)
+            self.navigationController!.popToRootViewControllerAnimated(true)
         }
     }
 

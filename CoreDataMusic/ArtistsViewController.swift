@@ -37,16 +37,16 @@ class ArtistsViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.artists.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("artistsCell", forIndexPath: indexPath) as UITableViewCell
         
         var artist = self.artists[indexPath.row]
         
-        cell.textLabel.text = artist.firstName
+        cell.textLabel!.text = artist.firstName
         return cell
     }
     
@@ -56,13 +56,13 @@ class ArtistsViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "addArtist" {
             let addArtistVC = segue.destinationViewController as AddArtistViewController
             addArtistVC.selectedLabel = self.selectedLabel
         } else if segue.identifier == "showSongs" {
             let songsVC = segue.destinationViewController as SongsViewController
-            songsVC.selectedArtist = self.artists[self.tableView.indexPathForSelectedRow().row]
+            songsVC.selectedArtist = self.artists[self.tableView.indexPathForSelectedRow()!.row]
         }
     }
     

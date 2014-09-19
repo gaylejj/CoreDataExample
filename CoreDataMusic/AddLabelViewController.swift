@@ -38,7 +38,7 @@ class AddLabelViewController: UIViewController {
         if error != nil {
             println(error?.localizedDescription)
         }
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
 
     /*
